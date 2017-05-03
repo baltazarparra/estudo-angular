@@ -1,1 +1,1 @@
-angular.module('Galeria', []);
+angular.module('Galeria', ['minhasDiretivas']);
