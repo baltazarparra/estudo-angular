@@ -1,18 +1,18 @@
 angular.module('Galeria').controller('FotosController', function($scope, $http) {
 	
 	$scope.fotos = []; 
-
-	// $http.get('/v1/fotos');
-	// promise.then(function(retorno) {
-	// 	$scope.fotos = retorno.data;
-	// }).catch(function (error) {
-	// 	console.log(error);
-	// });
-
-	$http.get('/v1/fotos')
+	
+	$http.get('https://api.pokemontcg.io/v1/cards?series=base&pageSize=12')
 	.success(function(retorno) {
-		console.log(retorno);
-		$scope.fotos = retorno; // não precisa fazer retorno.data
+		var imgArr = [];
+		imgArr.push(retorno.cards);
+		var newArr = imgArr[0].map(function (item) {
+			return {
+				url: item.imageUrl,
+				titulo: item.name
+			}
+		});
+		$scope.fotos = newArr;
 	})
 	.error(function(erro) {
 		console.log(erro);
