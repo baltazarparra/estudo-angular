@@ -6,23 +6,45 @@
 		<title>Galeria</title>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-		<script src="js/lib/angular.min.js"></script>
-		<script src="js/main.js"></script>
-		<script src="js/controllers/fotos-controller.js"></script>
-		<script src="js/directives/minhas-diretivas.js"></script>
+		<style media="screen">
+			.panel-body img {
+				will-change: transform;
+				box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+				transition: all 0.4s cubic-bezier(.25,.8,.25,1);
+			}
+			.panel-body img:hover {
+				transform: scale(1.1) translateY(-16px);
+				box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+			}
+		</style>
 	</head>
 	<body ng-controller="FotosController">
 		<div class="container">
-
-			<div class="jumbotron">
-				<h1 class="text-center">Galeria</h1>
-			</div>
-
 			<div class="row">
-				<meu-painel ng-repeat="foto in fotos" titulo="{{foto.titulo}}">
-					<img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
+				<div class="col-md-12">
+					<h1 class="text-center bg-danger">Fire Pokemons</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<form class="form-group">
+						<label class="center-block">
+							Search a fire pokemon
+							<input class="form-control" ng-model="filtro" placeholder="Ex. dark charizard">
+						</label>
+					</form>
+				</div>
+			</div>
+			<div class="row">
+				<meu-painel ng-repeat="foto in fotos | filter: filtro" titulo="{{foto.titulo}}">
+					<img class="img-responsive center-block" ng-src="{{foto.url}}" alt="{{foto.titulo}}">
 				</meu-painel>
 			</div><!-- fim row -->
 		</div> <!-- fim container -->
+	<script src="js/lib/angular.min.js"></script>
+	<script src="js/lib/angular-animate.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/controllers/fotos-controller.js"></script>
+	<script src="js/directives/minhas-diretivas.js"></script>
 	</body>
 </html>
